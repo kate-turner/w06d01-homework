@@ -22,6 +22,15 @@
 	</header>
 
 	<section>
+		<h2>User Photos</h2>
+		<ul>
+			<% for(let i = 0; i < user.photos.length; i++){ %>
+				<li><a href="/users/<%=user.photos[i].id%>"><%=user.photos[i].name%></a></li>
+			<%}%>
+		</ul>
+	</section>
+
+	<section>
 		<a href="/users/<%=user.id%>/edit">Edit</a>
 	</section>
 
