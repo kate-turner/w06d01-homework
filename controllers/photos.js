@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Photo = require('../models/photos');
-// const User = require('../models/photos.js');
+const User = require('../models/users');
 
 
 router.get("/", (req, res) => {
@@ -13,25 +13,37 @@ router.get("/", (req, res) => {
 				});
 			});
 	});
-
-
+	
 
 router.get("/new", (req, res) => {
-	res.render("photos/new.ejs")
-});
-
+	User.find({}, (err, allUsers)=> {
+		console.log(allUsers);
+		res.render("photos/new.ejs", {
+			users: allUsers
+			});	
+		});
+	});
+	
 router.post("/", (req, res) => {
-	Photo.create(req.body, (err, createdPhoto) => {
-		console.log(createdPhoto, 'this is the createdPhoto');
-		res.redirect('/photos');
+	User.findById(req.body.userId, (err, foundUser)=>{
+		Photo.create(req.body, (err, createdPhoto) => {
+			foundUser.photos.push(createdPhoto);
+			foundUser.save((err, data)=>{
+				console.log(createdPhoto, 'this is the createdPhoto');
+				res.redirect('/photos');
+			});
+		});
 	});
 });
 
 router.get("/:id", (req, res) => {
 	Photo.findById(req.params.id, (err, foundPhoto) => {
-		res.render("photos/show.ejs", {
-			photo: foundPhoto
-		});
+		User.findOne({'photos._id':req.params.id}, (error, foundUser)=>{
+			res.render("photos/show.ejs", {
+				user: foundUser,
+				photo: foundPhoto
+			});
+		})
 	});
 });
 

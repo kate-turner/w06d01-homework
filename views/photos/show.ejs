@@ -6,11 +6,17 @@
 </head>
 <body>
 <div class="container">
+	
 	<div class="row">
 		<h1>Photo Show Page</h1>
 	</div>
-
-	<img src="<%=photo.id.image%>">
+	
+	<div>
+	<img src="<%=photo.image%>">
+	
+	<small>by: <a href="/users/<%user._id%>"><%=user.userName%></a></small>
+	</div>
+	
 	<div class="row">
 		
 		<a href="/photos/<%=photo.id%>/edit">Edit</a>
