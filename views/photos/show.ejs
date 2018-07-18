@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<h1>Photo Show Page</h1>
+	</div>
+	<div class="row">
+		<a href="/photos/<%=photo.id%>/edit">Edit</a>
+	
+
+	
+		<form action="/photo/<%=photo.id%>?_method=DELETE" method="POST">
+			<button type="submit">Delete Photo</button>
+		</form>
+	
+
+
+
+</div>
+</body>
+</html>

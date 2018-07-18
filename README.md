@@ -1,4 +1,7 @@
 ---
+
+<% include ../partial/_navbar.ejs %>
+
 Title: Photo Site 
 Type: Homework 
 Competencies: Full CRUD in Express with Mongoose - 2 Model 
