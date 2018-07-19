@@ -10,16 +10,15 @@
 		
 	</div>
 
-	<%=users%>
 	<div class="row">
 		<form action="/photos" method="POST">
 			<select name="userId">
 				<% for(let i = 0; i < users.length; i++) { %>
-						<option value="<%=users[i].id%>"><%users[i].userName%></option> 
+						<option value="<%=users[i].id%>"><%=users[i].userName%></option> 
 				<% } %>
 			</select></br>
-			<input type="text" name="name"/>
-			<input type="text" name="image"/>
+			<input type="text" name="name"/ placeholder="name">
+			<input type="text" name="image" placeholder="image"/>
 			<input type="submit" value="Create Photo"/>
 		</form>
 
