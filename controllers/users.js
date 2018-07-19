@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/users');
+const Photo = require('../models/photos');
 
 router.get('/', (req,res) => {
 	User.find({}, (err, foundUsers) => {
@@ -51,8 +52,40 @@ router.get('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
 	User.findByIdAndRemove(req.params.id, (err, deletedUser) => {
 		console.log(deletedUser, 'this is the deletedUser');
-		res.redirect('/users')
-	})
+		const photoIds = [];
+		for(let i = 0; i < deletedUser.photos.length; i++){
+			photoIds.push(deletedUser.photos[i].id);
+		}
+		
+		Photo.remove({
+			_id: { $in: photoIds}
+		}, (err, data) => {
+			res.redirect('/users')
+		});
+	});
 });
+
+// router.delete('/:id', (req, res) => {
+
+//   Author.findByIdAndRemove(req.params.id, (err, deletedAuthor) => {
+//     console.log(deletedAuthor, ' this is deletedAuthor');
+//     // We are collecting all of the Article Ids from the deletedAuthors
+//     // articles property
+//     const articleIds = [];
+//     for(let i = 0; i < deletedAuthor.articles.length; i++){
+//       articleIds.push(deletedAuthor.articles[i].id);
+//     }
+
+//     Article.remove({
+//       _id: { $in: articleIds}
+//     }, (err, data) => {
+//       res.redirect('/authors')
+//     });
+//   });
+// });
+
+
+
+
 
 module.exports = router;

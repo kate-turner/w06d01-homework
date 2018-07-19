@@ -12,7 +12,7 @@
 
 <body>
 	<header>
-		<h1> Show Page for <%=user.userName%> </h1> 
+		<h1> Show Page for <!-- <%=user.userName%> --> </h1> 
 	<nav>
 		<ul>
 			<li><a href="/">Home</a></li>
@@ -25,7 +25,7 @@
 		<h2>User Photos</h2>
 		<ul>
 			<% for(let i = 0; i < user.photos.length; i++){ %>
-				<li><a href="/users/<%=user.photos[i].id%>"><%=user.photos[i].name%></a></li>
+				<li><a href="/photos/<%=user.photos[i]._id%>"><%=user.photos[i].name%></a></li>
 			<%}%>
 		</ul>
 	</section>

@@ -16,13 +16,23 @@
 
 	<div class="row">
 		<form action="/photos/<%=photo.id%>?_method=PUT" method="POST">
+			<select name="userId">
+				<%for(let i = 0; i < users.length; i++) {%>
+					<option
+						value="<%=users[i]._id%>"
+						<% if(users[i]._id.toString() === photoUser._id.toString()){ %>
+								selected
+						<%}%>
+						>
+						<%=users[i].userName%>
+					</option>
+				<%}%>
+			</select></br>
 			<input type="text" name="name"/></br>
 			<input type="text" name="image"/></br>
 			<input type="submit" value="Change Photo"/></br>
 		</form>
 	</div>
-
-
 
 
 
